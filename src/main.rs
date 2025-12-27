@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, process::exit};
 use num_bigint::{self, ToBigUint};
 fn hyper_factorial(n: u32) -> num_bigint::BigUint {
     if n == 0 || n == 1 {
@@ -13,6 +13,14 @@ fn hyper_factorial(n: u32) -> num_bigint::BigUint {
 }
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let name = &args[0];
-    println!("{}", name);
+    let name: &String = &args[0];
+    if args.len() < 2 {
+        println!("usage: {} <number>\nerror: no number provided!", name);
+        exit(1);
+    }
+    let n: u32 = args[1].parse::<u32>().unwrap_or_else(|_err| {
+        println!("usage: {} <number>\nerror: invalid number!", name);
+        exit(1);
+});
+    println!("{}\n {}", name, n);
 }
