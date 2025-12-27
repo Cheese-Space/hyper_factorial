@@ -22,5 +22,5 @@ fn main() {
         println!("usage: {} <number>\nerror: invalid number!", name);
         exit(1);
 });
-    println!("{}\n {}", name, n);
+    println!("{}", hyper_factorial(n));
 }
